@@ -10,8 +10,8 @@ from credentials import *
 
 wait_time = 1
 
-search_words = sys.argv[1:-1] if type(sys.argv[-1]) is int else sys.argv[1:]
-max_pages = sys.argv[-1] if type(sys.argv[-1]) is int else 1
+search_words = sys.argv[1:-1] if sys.argv[-1].isdecimal() else sys.argv[1:]
+max_pages = int(sys.argv[-1]) if sys.argv[-1].isdecimal() else 1
 
 for search_word in search_words:
     savedir = "./" + search_word
@@ -47,7 +47,7 @@ for search_word in search_words:
             pbar.update(1)
             page += 1
             for photo in tqdm(photos['photo']):
-                if photo['license'] != 9 and photo['license'] != 10:
+                if photo['license'] != "9" and photo['license'] != "10":
                     continue
                 url_q = photo['url_z']
                 filepath = savedir + '/' + photo['id'] + '.jpg'
