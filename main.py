@@ -92,7 +92,10 @@ for search_word in search_words:
                 if not 'url_z' in photo:
                     continue
                 url_q = photo['url_z']
-                filepath = savedir + '/' + photo['id'] + '.jpg'
+                owner_id = photo['owner']
+                filepath = savedir + '/' + owner_id + '/' + photo['id'] + '.jpg'
+                if not os.path.exists(savedir + '/' + owner_id):
+                    os.makedirs(savedir + '/' + owner_id)
                 # ファイルが重複していたらスキップする
                 if os.path.exists(filepath): continue
                 # データをダウンロードする
