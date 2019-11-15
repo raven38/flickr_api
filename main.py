@@ -77,7 +77,7 @@ for search_word in search_words:
                 license = '9,10',
                 # 取得したいオプションの値(url_q->画像のアドレスが入っている情報、licence -> ライセンス情報)
                 extras = 'url_z, license, path_alias',
-                page = 1        
+                page = page        
             )
             photos = result['photos']
             with open('result.log', "a") as f:
@@ -88,6 +88,8 @@ for search_word in search_words:
             page += 1
             for photo in tqdm(photos['photo']):
                 if photo['license'] != "9" and photo['license'] != "10":
+                    continue
+                if not 'url_z' in photo:
                     continue
                 url_q = photo['url_z']
                 filepath = savedir + '/' + photo['id'] + '.jpg'
